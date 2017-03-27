@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body ng-app="myApp">
+    <div ng-controller="customersCtrl">
+        <div>
+            <select name="repeatSelect" id="repeatSelect" ng-model="Location">
+                <option value="" selected>--Please select your Location--</option>
+                <option ng-repeat="option in Locations.data" value="{{option.id}}">{{option.name}}</option>
+            </select>
+            <h1>Location is: {{Location}}</h1>
+        </div>
+        <div>
+            <select name="repeatSelect" id="repeatSelect" ng-model="Catogery">
+                <option value="" selected>--Please select your Category--</option>
+                <option ng-repeat="option in Categories.data" value="{{option.id}}">{{option.name}}</option>
+            </select>
+            <h1>Category is: {{Catogery}}</h1>
+        </div>
+    </div>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('customersCtrl', function ($scope, $http) {
+            $http.get("/api/Locations").then(function (response) {
+                debugger;
+                $scope.Locations = response;
+            });
+            $http.get("/api/Categories").then(function (response) {
+                debugger;
+                $scope.Categories = response;
+            });
+        });
+        //var app = angular.module('myApp', []);
+        //app.controller('customersCtrl2', function ($scope, $http) {
+        //    $http.get("/api/Categories").then(function (response) {
+        //        debugger;
+        //        $scope.Categories = response;
+        //    });
+        //});
+    </script>
+</body>
+</html>
